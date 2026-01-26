@@ -43,7 +43,7 @@ async function addToSession(sessionName, cwd) {
     {
       type: 'input',
       name: 'command',
-      message: 'Command to run on start (optional):',
+      message: ' Command to run on start (optional):',
     }
   ]);
 
@@ -78,20 +78,26 @@ function restoreSession(sessionName) {
       args.push('new-tab');
     }
 
+    // Force PowerShell profile
+    args.push('-p');
+    args.push('Windows PowerShell');
+
     if (tab.path) {
       args.push('-d');
       args.push(tab.path);
     }
 
     if (tab.command) {
-      args.push('cmd');
-      args.push('/k');
+      // PowerShell command execution
+      args.push('powershell'); // Redundant if profile is set, but ensures command syntax works if profile is weird
+      args.push('-NoExit');
+      args.push('-Command');
       args.push(tab.command);
     }
   });
 
   console.log(chalk.blue(`Launching session '${sessionName}'...`));
-  const subprocess = spawn('wt', args, { detached: true, stdio: 'ignore', shell: true });
+  const subprocess = spawn('wt', args, { detached: true, stdio: 'ignore', shell: false });
   subprocess.unref();
 }
 
@@ -311,7 +317,7 @@ program
         {
           type: 'input',
           name: 'input',
-          message: 'Select session number or name:',
+          message: ' Select session number or name:',
           validate: (input) => {
             if (!input) return "Please enter a value";
             const num = parseInt(input, 10);
