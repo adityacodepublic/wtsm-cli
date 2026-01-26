@@ -1,16 +1,37 @@
 {
   "name": "wtsm",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Windows Terminal Session Manager",
   "main": "index.js",
   "bin": {
     "s": "./index.js"
   },
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "windows-terminal",
+    "session-manager",
+    "cli",
+    "terminal",
+    "wt"
+  ],
+  "homepage": "https://github.com/adityacodepublic/wts-cli#readme",
+  "bugs": {
+    "url": "https://github.com/adityacodepublic/wts-cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adityacodepublic/wts-cli.git"
+  },
+  "author": "adityacodepublic (https://github.com/adityacodepublic)",
+  "license": "MIT",
   "type": "module",
   "dependencies": {
     "chalk": "^5.6.2",
