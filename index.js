@@ -11,6 +11,7 @@ import readline from 'readline';
 
 const SESSION_FILE = path.join(os.homedir(), '.wts-sessions.json');
 const program = new Command();
+readline.emitKeypressEvents(process.stdin);
 
 // --- Data Helpers ---
 
@@ -39,21 +40,32 @@ async function addToSession(sessionName, cwd) {
     return;
   }
 
-  const { command } = await inquirer.prompt([
-    {
-      type: 'input',
-      name: 'command',
-      message: ' Command to run on start (optional):',
+  const handleExit = (str, key) => {
+    if (key && (key.ctrl && key.name === 'c' || key.name === 'q' || key.name === 'escape')) {
+      process.exit(0);
     }
-  ]);
+  };
+  process.stdin.on('keypress', handleExit);
 
-  sessions[sessionName].push({
-    path: cwd,
-    command: command.trim() || null
-  });
+  try {
+    const { command } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'command',
+        message: ' Command to run on start (optional):',
+      }
+    ]);
 
-  saveSessions(sessions);
-  console.log(chalk.green(`Added current path to session '${sessionName}'.`));
+    sessions[sessionName].push({
+      path: cwd,
+      command: command.trim() || null
+    });
+
+    saveSessions(sessions);
+    console.log(chalk.green(`Added current path to session '${sessionName}'.`));
+  } finally {
+    process.stdin.removeListener('keypress', handleExit);
+  }
 }
 
 function restoreSession(sessionName) {
@@ -315,23 +327,38 @@ program
       });
       console.log();
 
-      const answer = await inquirer.prompt([
-        {
-          type: 'input',
-          name: 'input',
-          message: ' Select session (number or name):',
-          validate: (input) => {
-            if (!input) return "Please enter a value";
-            const num = parseInt(input, 10);
-            if (!isNaN(num)) {
-              if (num < 1 || num > sessionNames.length) return "Invalid number";
-            } else {
-              if (!sessions[input]) return "Session not found";
-            }
-            return true;
-          }
+      const handleExit = (str, key) => {
+        if (key && (key.ctrl && key.name === 'c' || key.name === 'q' || key.name === 'escape')) {
+          process.exit(0);
         }
-      ]);
+      };
+      process.stdin.on('keypress', handleExit);
+
+      let answer;
+      try {
+        answer = await inquirer.prompt([
+          {
+            type: 'input',
+            name: 'input',
+            message: ' Select session (number or name):',
+            validate: (input) => {
+              if (input === 'q') return true;
+              if (!input) return "Please enter a value";
+              const num = parseInt(input, 10);
+              if (!isNaN(num)) {
+                if (num < 1 || num > sessionNames.length) return "Invalid number";
+              } else {
+                if (!sessions[input]) return "Session not found";
+              }
+              return true;
+            }
+          }
+        ]);
+      } finally {
+        process.stdin.removeListener('keypress', handleExit);
+      }
+
+      if (answer.input === 'q') process.exit(0);
 
       const num = parseInt(answer.input, 10);
       if (!isNaN(num)) {
