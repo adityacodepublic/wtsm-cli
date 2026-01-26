@@ -1,6 +1,6 @@
 {
-  "name": "wts-cli",
-  "version": "1.0.0",
+  "name": "wtsm",
+  "version": "1.0.1",
   "description": "Windows Terminal Session Manager",
   "main": "index.js",
   "bin": {
