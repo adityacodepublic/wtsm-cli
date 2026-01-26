@@ -308,16 +308,18 @@ program
 
     if (!targetSession) {
       // Print numbered list
-      console.log(chalk.cyan("Available Sessions:"));
+      console.log(chalk.cyan.bold("  Available Sessions"));
+      console.log(chalk.gray("  ------------------"));
       sessionNames.forEach((name, idx) => {
-        console.log(`${chalk.bold(idx + 1)}. ${name}`);
+        console.log(`  ${chalk.yellow(idx + 1)}. ${chalk.white(name)}`);
       });
+      console.log();
 
       const answer = await inquirer.prompt([
         {
           type: 'input',
           name: 'input',
-          message: ' Select session number or name:',
+          message: ' Select session (number or name):',
           validate: (input) => {
             if (!input) return "Please enter a value";
             const num = parseInt(input, 10);

@@ -58,3 +58,7 @@ s work
 ```
 *Opens a new Windows Terminal window with all configured tabs.*
 
+clean scroll page, 
+### 4 Not implemented features
+- Automatically use current shell
+- Pane capture
