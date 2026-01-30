@@ -70,6 +70,8 @@ _Opens a new Windows Terminal window with all configured tabs._
 
 ### 4 Not implemented features
 
+- currently only supports powershell - find the powershell profile if the default name not found else just normal powershell. find running info via the files
 - clean scroll page,
-- Automatically use current shell
-- Pane capture
+- Pane capture command or path
+
+- Automatically use current shell profile

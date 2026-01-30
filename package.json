@@ -2,18 +2,21 @@
   "name": "wtsm",
   "version": "1.0.3",
   "description": "Windows Terminal Session Manager",
-  "main": "index.js",
+  "type": "module",
+  "main": "./dist/index.mjs",
   "bin": {
-    "s": "./index.js"
+    "s": "./dist/index.mjs"
   },
   "files": [
-    "index.js"
+    "dist"
   ],
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsdown",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "windows-terminal",
@@ -32,10 +35,14 @@
   },
   "author": "adityacodepublic (https://github.com/adityacodepublic)",
   "license": "MIT",
-  "type": "module",
   "dependencies": {
     "chalk": "^5.6.2",
     "commander": "^14.0.2",
     "inquirer": "^13.2.1"
+  },
+  "devDependencies": {
+    "tsdown": "^0.20.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }

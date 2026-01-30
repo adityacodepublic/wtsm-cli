@@ -1,0 +1,58 @@
+# Source files
+src/
+
+# Configuration files
+tsconfig.json
+tsdown.config.ts
+tsdown.config.mjs
+tsdown.config.js
+
+# Build tools
+node_modules/
+
+# Git files
+.git
+.gitignore
+
+# NPM files
+package-lock.json
+.npmrc
+
+# Test files
+**/*.test.ts
+**/*.spec.ts
+test/
+tests/
+__tests__/
+
+# Coverage
+coverage/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+circle.yml
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts (excluding dist which we want)
+*.tsbuildinfo
+*.log
+
+# Tarball files
+*.tgz
+
+# Misc
+.eslintrc*
+.prettierrc*
+.editorconfig
