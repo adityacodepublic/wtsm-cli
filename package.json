@@ -1,6 +1,6 @@
 {
   "name": "wtsm",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Windows Terminal Session Manager",
   "type": "module",
   "main": "./dist/index.mjs",
