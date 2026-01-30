@@ -20,6 +20,7 @@ function interactiveList(): Promise<void> {
   let selectedIndex = 0;
   let activeSessionName: string | null = null;
   let tabs: Tab[] = [];
+  let renderedLines = 0;
 
   const { stdin, stdout } = process;
   
@@ -43,7 +44,11 @@ function interactiveList(): Promise<void> {
   }
 
   function render(): void {
-    console.clear();
+    if (renderedLines === 0) {
+      stdout.write('\x1b[2J\x1b[H');
+    } else {
+      stdout.write(`\x1b[${renderedLines}A\x1b[0J`);
+    }
 
     if (view === "sessions") {
       console.log(chalk.cyan.bold("  Windows Terminal Sessions"));
@@ -62,6 +67,7 @@ function interactiveList(): Promise<void> {
           "\n  (↑/↓: Move, Enter/→: Open, Ctrl+D: Delete, q/Esc: Exit)",
         ),
       );
+      renderedLines = 4 + sessionNames.length;
     } else if (view === "tabs") {
       console.log(chalk.cyan.bold(`  Session: ${activeSessionName}`));
       console.log(chalk.gray("  -------------------------"));
@@ -80,6 +86,7 @@ function interactiveList(): Promise<void> {
       }
 
       console.log(chalk.gray("\n  (←: Back, Ctrl+D: Delete, q/Esc: Exit)"));
+      renderedLines = 4 + tabs.length;
     }
   }
 

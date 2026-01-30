@@ -7,7 +7,7 @@ A CLI tool to define, save, and launch named Windows Terminal sessions with spec
 Ensure the tool is linked globally:
 
 ```bash
-npm link
+npm i wtsm -g
 ```
 
 ## Usage Guide
@@ -70,8 +70,6 @@ _Opens a new Windows Terminal window with all configured tabs._
 
 ### 4 Not implemented features
 
-- currently only supports powershell - find the powershell profile if the default name not found else just normal powershell. find running info via the files
-- clean scroll page,
-- Pane capture command or path
-
+- currently only supports powershell
 - Automatically use current shell profile
+- Pane capture
