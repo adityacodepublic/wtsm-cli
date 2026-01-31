@@ -12,7 +12,7 @@ export function createCLI(): Command {
   program
     .name("s")
     .description("Windows Terminal Session Manager")
-    .version("1.1.0");
+    .version("1.1.1");
 
   program.addCommand(createCommand());
   program.addCommand(addCommand());
