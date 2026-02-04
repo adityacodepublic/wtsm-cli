@@ -41,7 +41,9 @@ if (rawArgs.length > 0 && !knownCommands.includes(rawArgs[0])) {
   if (secondArg === "add") {
     addToSession(sessionName, process.cwd());
   } else {
-    restoreSession(sessionName);
+    // Check for user provided flag
+    const isCurrentWindow = rawArgs.includes("--current") || rawArgs.includes("-c");
+    restoreSession(sessionName, { currentWindow: isCurrentWindow });
   }
 } else {
   const program = createCLI();
