@@ -1,2 +1,0 @@
-rawArgs: ["ecom","--current"]
-isCurrentWindow: true
