@@ -12,7 +12,7 @@ export function createCLI(): Command {
   program
     .name("s")
     .description("Windows Terminal Session Manager")
-    .version("1.1.1");
+    .version("1.2.1");
 
   program.addCommand(createCommand());
   program.addCommand(addCommand());
@@ -42,7 +42,8 @@ if (rawArgs.length > 0 && !knownCommands.includes(rawArgs[0])) {
     addToSession(sessionName, process.cwd());
   } else {
     // Check for user provided flag
-    const isCurrentWindow = rawArgs.includes("--current") || rawArgs.includes("-c");
+    const isCurrentWindow =
+      rawArgs.includes("--current") || rawArgs.includes("-c");
     restoreSession(sessionName, { currentWindow: isCurrentWindow });
   }
 } else {

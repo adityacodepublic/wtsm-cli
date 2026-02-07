@@ -64,9 +64,10 @@ s ls
 s <name>
 # Example:
 s work
-```
 
-_Opens a new Windows Terminal window with all configured tabs._
+# Open in current Windows Terminal window: --current or -c
+s work -c
+```
 
 ### 4 Not implemented features
 
